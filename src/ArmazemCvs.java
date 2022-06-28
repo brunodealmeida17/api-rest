@@ -1,22 +1,24 @@
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
+import java.io.FileWriter;
+import org.json.simple.JSONObject;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 
 public class ArmazemCvs {
 
     public static void main(String[] args) {
         File armazem = new File("csv/[Ambiente] Armazém 03.csv");
+        JSONObject armazemJson = new JSONObject();
+        FileWriter armazemFile = null;
+        String LinhasDoArquivo = new String();
+        String Ts = new String();
+        String Dado = new String();
 
         try {
-            String LinhasDoArquivo = new String();
-            String Ts = new String();
-            String Dado = new String();
-
-
 
             Scanner leitor = new Scanner(armazem);
 
@@ -28,14 +30,15 @@ public class ArmazemCvs {
                 Ts = ValoresDoArquivo[0];
                 Dado = ValoresDoArquivo[1];
 
-                JSONObject armazemJson = new JSONObject();
-
                 armazemJson.put("xid", "ID0001_TEMP");
                 armazemJson.put("ts", Ts);
                 armazemJson.put("dado", Dado);
 
-
-                System.out.println(armazemJson);
+                armazemFile = new FileWriter("armazem.json");
+                armazemFile.write(armazemJson.toJSONString());
+                armazemFile.flush();
+                armazemFile.close();
+                System.out.println(armazemJson.toJSONString());
 
 
 
@@ -43,7 +46,7 @@ public class ArmazemCvs {
             }
         } catch (FileNotFoundException e) {
             System.out.println("erro ao abrir arquivo!");
-        } catch (JSONException e) {
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
 

@@ -1,24 +1,26 @@
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
+import java.io.FileWriter;
+import org.json.simple.JSONObject;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 
 public class HeparinaCvs {
 
     public static void main(String[] args) {
-        File heparina = new File("csv/[Umidade 01] Sala Heparina.csv");
+        File armazem = new File("csv/[Ambiente] Armazém 03.csv");
+        JSONObject armazemJson = new JSONObject();
+        FileWriter armazemFile = null;
+        String LinhasDoArquivo = new String();
+        String Ts = new String();
+        String Dado = new String();
 
         try {
-            String LinhasDoArquivo = new String();
-            String Ts = new String();
-            String Dado = new String();
 
-
-
-            Scanner leitor = new Scanner(heparina);
+            Scanner leitor = new Scanner(armazem);
 
             while (leitor.hasNext()) {
                 LinhasDoArquivo = leitor.nextLine();
@@ -28,22 +30,22 @@ public class HeparinaCvs {
                 Ts = ValoresDoArquivo[0];
                 Dado = ValoresDoArquivo[1];
 
-                JSONObject armazem = new JSONObject();
+                armazemJson.put("xid", "ID0003_TEMP");
+                armazemJson.put("ts", Ts);
+                armazemJson.put("dado", Dado);
 
-                armazem.put("xid", "ID0002_TEMP");
-                armazem.put("ts", Ts);
-                armazem.put("dado", Dado);
-
-
-                System.out.println(armazem);
-
+                armazemFile = new FileWriter("Heparina.json");
+                armazemFile.write(armazemJson.toJSONString());
+                armazemFile.flush();
+                armazemFile.close();
+                System.out.println(armazemJson.toJSONString());
 
 
 
             }
         } catch (FileNotFoundException e) {
             System.out.println("erro ao abrir arquivo!");
-        } catch (JSONException e) {
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
