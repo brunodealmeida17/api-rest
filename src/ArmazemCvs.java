@@ -6,37 +6,36 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
-public class DivisaoCvs {
+public class ArmazemCvs {
 
     public static void main(String[] args) {
-        File divisao = new File("csv/[Refrigerador] Divisão.csv");
-
+        File armazem = new File("csv/[Ambiente] Armazém 03.csv");
 
         try {
-            String linhasDoArquivo = new String();
+            String LinhasDoArquivo = new String();
             String Ts = new String();
             String Dado = new String();
 
 
 
-            Scanner leitor = new Scanner(divisao);
+            Scanner leitor = new Scanner(armazem);
 
             while (leitor.hasNext()) {
-                linhasDoArquivo = leitor.nextLine();
+                LinhasDoArquivo = leitor.nextLine();
 
-                String[] ValoresDoArquivo = linhasDoArquivo.split(",");
+                String[] ValoresDoArquivo = LinhasDoArquivo.split(",");
 
                 Ts = ValoresDoArquivo[0];
                 Dado = ValoresDoArquivo[1];
 
-                JSONObject divisaoJson = new JSONObject();
+                JSONObject armazemJson = new JSONObject();
 
-                divisaoJson.put("xid", "ID0003_TEMP");
-                divisaoJson.put("ts", Ts);
-                divisaoJson.put("dado", Dado);
+                armazemJson.put("xid", "ID0001_TEMP");
+                armazemJson.put("ts", Ts);
+                armazemJson.put("dado", Dado);
 
 
-                System.out.println(divisaoJson);
+                System.out.println(armazemJson);
 
 
 

@@ -9,30 +9,30 @@ import org.json.JSONObject;
 public class HeparinaCvs {
 
     public static void main(String[] args) {
-        File arquivo1 = new File("D:\\\\downloads\\\\testesensorweb\\\\[Umidade 01] Sala Heparina.csv");
+        File heparina = new File("csv/[Umidade 01] Sala Heparina.csv");
 
         try {
-            String linhasDoArquivo = new String();
-            String ts = new String();
-            String dado = new String();
-            String xid = new String();
+            String LinhasDoArquivo = new String();
+            String Ts = new String();
+            String Dado = new String();
 
 
-            Scanner leitor = new Scanner(arquivo1);
+
+            Scanner leitor = new Scanner(heparina);
 
             while (leitor.hasNext()) {
-                linhasDoArquivo = leitor.nextLine();
+                LinhasDoArquivo = leitor.nextLine();
 
-                String[] ValoresDoArquivo = linhasDoArquivo.split(",");
+                String[] ValoresDoArquivo = LinhasDoArquivo.split(",");
 
-                ts = ValoresDoArquivo[0];
-                dado = ValoresDoArquivo[1];
+                Ts = ValoresDoArquivo[0];
+                Dado = ValoresDoArquivo[1];
 
                 JSONObject armazem = new JSONObject();
 
-                armazem.put("xid", "ID0001_TEMP");
-                armazem.put("ts", ts);
-                armazem.put("dado", dado);
+                armazem.put("xid", "ID0002_TEMP");
+                armazem.put("ts", Ts);
+                armazem.put("dado", Dado);
 
 
                 System.out.println(armazem);
